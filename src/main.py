@@ -151,82 +151,25 @@ def start_training():
     torch.save(attn_decoder1, 'models/decoder.pt')
 
 def start_evaluating():
-    #print("Load Model_____________________________________________")
     global encoder1, attn_decoder1, input_lang, output_lang, pairs
 
     encoder1 = torch.load(encoder_load_path)
     attn_decoder1 = torch.load(decoder_load_path)
 
-    if TEST_EVALUATION_MODE == 1:      # randomly evaluate some sentences
-        start_random_evaluation_print()
-    elif TEST_EVALUATION_MODE == 2:    # compare the loaded model on test dataset
+    if DEMO_MODE or TEST_EVALUATION_MODE == 1:      # randomly evaluate some sentences
+        start_random_evaluation_print(pairs, test_pairs, encoder1, attn_decoder1, input_lang, output_lang, train_input_lang_size)
+    if DEMO_MODE or TEST_EVALUATION_MODE == 2:    # compare the loaded model on test dataset
         predicted_keywords_total, correctly_predicted_keywords_total = evaluation_iterations(encoder1, attn_decoder1, input_lang, output_lang, test_pairs, train_input_lang_size,
                                                                                              N_TEST_EVALUATION_EPOCHS, N_TEST_EVALUATION_SAVE_EVERY, N_TEST_EVALUATION_PLOT_EVERY, path='/models/' + date_folder)
         print('Overall Test eval score = %.4f (%d/%d)' % (
         correctly_predicted_keywords_total / predicted_keywords_total, correctly_predicted_keywords_total,
         predicted_keywords_total))
-    elif TEST_EVALUATION_MODE == 3:    # evaluating input
-        evaluate_console_input()
-    elif TEST_EVALUATION_MODE == 4:    # compare different models on test dataset
+    if DEMO_MODE or TEST_EVALUATION_MODE == 3:    # evaluating input
+        evaluate_console_input(encoder1, attn_decoder1, input_lang, output_lang)
+    elif TEST_EVALUATION_MODE == 4:                 # compare different models on test dataset
         evaluation_iterations_multiple_models(input_lang, output_lang, test_pairs, train_input_lang_size,
                                               N_TEST_EVALUATION_EPOCHS, N_TEST_EVALUATION_SAVE_EVERY, N_TEST_EVALUATION_PLOT_EVERY, path ='models/' + date_folder)
 
-
-
-
-def output_evaluation(input_sentence, encoder, decoder, input_lang):
-    output_words, attentions = evaluate(
-        encoder, decoder, input_sentence, input_lang, output_lang
-    )
-
-    print("Input              = ", input_sentence)
-    print("Predicted Keywords = ", ' '.join(output_words))
-    return output_words
-
-def start_random_evaluation_print():
-    i = 0
-    while i < RANDOM_EVALUATION_AMOUNT:
-        print(str(i) + ' ___________________')
-
-        if EVALUATE_ON_TESTING:
-            evaluate_randomly(test_pairs, i)
-        else:
-            evaluate_randomly(pairs)
-
-        i = i + 1
-
-def evaluate_randomly(pairs, i = -1, debug = DEBUG):
-    global encoder1, attn_decoder1, input_lang, output_lang
-
-    if (i == -1 or not debug):
-        pair = random.choice(pairs)
-        filtered_sentence = pair[0]
-    else:
-        pair = pairs[i]
-        # print(pair)
-
-    if EVALUATE_ON_TESTING:                                                                                             # if evaluating on test there may be words that have an index that exceeds the trained embedding size
-        filtered_sentence = filter_sentence_containing_only_train_index(pair, input_lang, train_input_lang_size)
-
-
-    #print('>', pair[0])
-    #prediction = output_evaluation(pair[0] , encoder1, attn_decoder1, input_lang)
-    prediction = output_evaluation(filtered_sentence , encoder1, attn_decoder1, input_lang)
-    # TODO FIX OUTPUT
-    print(' '.join(prediction[:-1]) == pair[1],' | Actual     = ', pair[1])
-
-
-
-def evaluate_console_input():
-    while(True):
-        try:
-            inp = raw_input(">")
-            print('processing query')
-            #input_lang.add_sentence(inp)
-            inp = normalize_string(inp)
-            output_evaluation(inp, encoder1, attn_decoder1, input_lang)
-        except KeyError as e:
-            print ('I got a KeyError - reason "%s"' % str(e))
 
 if TRAIN:
     start_training()

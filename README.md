@@ -15,6 +15,7 @@ The achieved performance metrics used in the above mentioned chinese paper _Keyp
 | |Precision|Recall|F1-score|
 |:--|:--|:--|:--|
 |Joint Layer RNN | 80.74% | 81.19%|80.97%|
+
 For their Joint Layer RNN they use more sophisticated deep recurrent neural networks, which jointly process keyword ranking, keyphrase generation, and keyphrase ranking and use word embeddings which contain semantic meaning.  
 This combined with the fact that the field of Deep Learning and especially Keyword Extraction was previously unbeknownst to me, made for an interesting challenge to see how well a more simple network would fare.
 

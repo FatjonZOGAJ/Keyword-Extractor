@@ -2,6 +2,7 @@ from datetime import datetime
 
 import torch
 import torch.nn as nn
+from pip._vendor.distlib.compat import raw_input
 from torch import optim
 import time
 import random
@@ -51,6 +52,8 @@ def evaluate(encoder, decoder, sentence, input_lang, output_lang, max_length=MAX
     return decoded_words, decoder_attentions[:di + 1]
 
 def evaluation_iterations(encoder, decoder, input_lang, output_lang, pairs, train_input_lang_size, n_epochs, n_save_every=1000, n_plot_tick_every=200, path =''):
+    print('\nSTARTING EVALUATION ITERATION____________________________________________________________________________' )
+
     start = time.time()
     max_prints = 3
 
@@ -132,3 +135,51 @@ def evaluation_iterations_multiple_models(input_lang, output_lang, pairs, train_
         plot_correct_predictions_percentages.append(correctly_predicted_keywords_total / predicted_keywords_total)
 
     model_comparison_save_plot(plot_correct_predictions_percentages, path + '/MODELCOMPARISON' + start_time + '.png', MODEL_ITERATIONS_START, MODEL_ITERATIONS_END, MODEL_ITERATIONS_STEP)
+
+def start_random_evaluation_print(pairs, test_pairs, encoder, decoder, input_lang, output_lang, train_input_lang_size):
+    print('\nSTARTING RANDOM EVALUATION____________________________________________________________________________' )
+    i = 0
+    while i < RANDOM_EVALUATION_AMOUNT:
+        print(str(i) + ' ___________________')
+
+        if EVALUATE_ON_TESTING:
+            evaluate_randomly(test_pairs, encoder, decoder, input_lang, output_lang, train_input_lang_size)
+        else:
+            evaluate_randomly(pairs,      encoder, decoder, input_lang, output_lang, train_input_lang_size)
+
+        i = i + 1
+
+
+def evaluate_randomly(pairs, encoder, decoder, input_lang, output_lang, train_input_lang_size):
+
+    pair = random.choice(pairs)
+    filtered_sentence = pair[0]
+
+    if EVALUATE_ON_TESTING:                                                                                             # if evaluating on test there may be words that have an index that exceeds the trained embedding size
+        filtered_sentence = filter_sentence_containing_only_train_index(pair, input_lang, train_input_lang_size)
+
+    prediction = output_evaluation(filtered_sentence, encoder, decoder, input_lang, output_lang)
+    print('Actual Keywords    = ', pair[1])
+
+
+def output_evaluation(input_sentence, encoder, decoder, input_lang, output_lang):
+    output_words, attentions = evaluate(
+        encoder, decoder, input_sentence, input_lang, output_lang
+    )
+
+    print("Input              = ", input_sentence)
+    print("Predicted Keywords = ", ' '.join(output_words))
+    return output_words
+
+
+
+def evaluate_console_input(encoder, decoder, input_lang, output_lang):
+    print('\nSTARTING CONSOLE INPUT EVALUATION____________________________________________________________________________' )
+
+    while(True):
+        try:
+            inp = raw_input("Please enter input: ")
+            inp = normalize_string(inp)
+            output_evaluation(inp, encoder, decoder, input_lang, output_lang)
+        except KeyError as e:
+            print ('I got a KeyError - reason "%s"' % str(e))

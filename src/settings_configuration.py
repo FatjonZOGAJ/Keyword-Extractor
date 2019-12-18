@@ -1,7 +1,7 @@
 import torch
 import os
 
-os.chdir('C:/Users/Fatjon/OneDrive/Uni/2019 WS/Applied Deep Learning/UE/Projekt')
+os.chdir('C:/Users/Fatjon/Documents/AppliedDeepLearning')
 root_path = os.getcwd()
 
 use_cuda = True #False
@@ -23,7 +23,10 @@ EVALUATE_ON_TESTING = True
 # 2.	Compare the loaded model on test dataset
 # 3.	Evaluate User Input
 # 4.	Compare different models on test dataset (needs to let the model train for multiple epochs / iterations and then set the respective MODEL_ITERATIONS_... variables)
-TEST_EVALUATION_MODE = 2
+TEST_EVALUATION_MODE = 3
+
+# runs a deni for TEST_EVALUATION_MODE 1-3
+DEMO_MODE = True
 
 DEBUG = False
 
@@ -32,7 +35,7 @@ sentence_keyword_data = 'trnTweet-keyword' #'tweet-keyword' #'keyword-data' #   
 sentence_keyword_data_test = 'testTweet-keyword'                                                                        #  test data
 
 # which model to load
-MODEL_ITERATIONS_VERSION = '180000'                                                                                     # longest trained: 195000 (best correct prediction percentage: 180000)
+MODEL_ITERATIONS_VERSION = '195000'                                                                                     # longest trained: 195000 (best correct prediction percentage: 180000)
 date_folder = '2019-12-18-0349'
 
 # MODEL_COMPARISONS_EVALUATION = 1
