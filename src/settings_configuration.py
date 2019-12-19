@@ -11,7 +11,7 @@ if USE_CUDA:
 # training or testing
 TRAIN    = True
 # Used for training: creates a new model if true, else it takes the ones based on load_encoder & load_decoder
-NEW_MODEL = True
+NEW_MODEL = False
 
 # evaluates on training dataset during training (if false it trains without evaluating)
 EVALUATE_ON_TRAINING_WHILE_TRAINING = True
