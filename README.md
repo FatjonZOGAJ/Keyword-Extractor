@@ -57,59 +57,58 @@ Training specific:
 * NEW_MODEL: lets us keep training a model instead of starting from new
 * EVALUATE_ON_TRAINING_WHILE_TRAINING: prints out evaluation analysis on training dataset during training
 
-        
-    Started Training_______________________________________
-    11m 9s (- 1105m 8s) (5000 1%) Loss: 5.0906 Train eval score = 0.0615 (254/4131)
-    22m 19s (- 1094m 12s) (10000 2%) Loss: 4.5539 Train eval score = 0.1164 (509/4373)
-    33m 27s (- 1081m 54s) (15000 3%) Loss: 4.3795 Train eval score = 0.1183 (505/4268)
-    44m 35s (- 1070m 13s) (20000 4%) Loss: 4.2944 Train eval score = 0.1282 (531/4142)
-    .
-    .
-    .
-    415m 36s (- 707m 38s) (185000 37%) Loss: 2.0175 Train eval score = 0.4880 (1565/3207)
-    426m 54s (- 696m 32s) (190000 38%) Loss: 1.9526 Train eval score = 0.4921 (1527/3103)
-    438m 18s (- 685m 32s) (195000 39%) Loss: 1.9734 Train eval score = 0.4962 (1519/3061)
+
+	    Started Training_______________________________________
+	    11m 9s (- 1105m 8s) (5000 1%) Loss: 5.0906 Train eval score = 0.0615 (254/4131)
+	    22m 19s (- 1094m 12s) (10000 2%) Loss: 4.5539 Train eval score = 0.1164 (509/4373)
+	    33m 27s (- 1081m 54s) (15000 3%) Loss: 4.3795 Train eval score = 0.1183 (505/4268)
+	    44m 35s (- 1070m 13s) (20000 4%) Loss: 4.2944 Train eval score = 0.1282 (531/4142)
+	    .
+	    .
+	    .
+	    415m 36s (- 707m 38s) (185000 37%) Loss: 2.0175 Train eval score = 0.4880 (1565/3207)
+	    426m 54s (- 696m 32s) (190000 38%) Loss: 1.9526 Train eval score = 0.4921 (1527/3103)
+	    438m 18s (- 685m 32s) (195000 39%) Loss: 1.9734 Train eval score = 0.4962 (1519/3061)
 
 Testing/Evaluation specific:
 * EVALUATE_ON_TESTING: lets us define if we want to evaluate on training (trnTweet-keyword.txt) or validation (testTweet-keyword.txt) dataset during our testing (see TRAIN = FALSE)
 * TEST_EVALUATION_MODE: Try out different modes (values 1 to 4) to see the project in action. Except for Mode 4 all can be run from the default settings without any extra steps necessary (pre-trained model necessary).
 
-   
-    1.   Randomly evaluates some sentences (RANDOM_EVALUATION_AMOUNT) (see pictures/EvalModeRandom.png)
-            0 ___________________
-            Input              =  i nominate thegrandehipsta ariana rilakkuma contest
-            Predicted Keywords =  ariana rilakkuma contest <EOS>
-            Actual Keywords    =  ariana rilakkuma contest  
-            1 ___________________
-            Input              =  how to create a social media marketing strategy in easy steps 
-            Predicted Keywords =  social media marketing <EOS>
-            Actual Keywords    =  social media
-            2 ___________________
-            Input              =  for presidents day we ll be posting a series of videos with great presidential speeches in film and tv !
-            Predicted Keywords =  day <EOS>
-            Actual Keywords    =  presidents day
-    
-	2.   Compare the loaded model on test dataset                     (see pictures/EvalModeValidationSet.png)
-	        STARTING EVALUATION ITERATION____________________________________________________________________________
-                 Sentence:    retweet the tity follow train in my last tweet ! ! 
-                 Keywords:    tity follow train
-                 Prediction:  follow train 
-            
-                 Sentence:    visiting stjohnsshopping this friday ? look out for the smart swaps roadshow ! see where we ll be next 
-                 Keywords:    smart swaps
-                 Prediction:  smart swaps 
-                 0m 4s (- 0m 40s) (10 10%) Test eval score = 0.5500 (11/20)
-                 
-	3.   Evaluate User Input                                          (see pictures/EvalModeInput.png)
-	            STARTING CONSOLE INPUT EVALUATION____________________________________________________________________________
-                Please enter input: Trying out a few examples ourself we see that this unfortunately does not seem to work too well with self formulated sentences which do not fit within Twitter culture.
-                Input              =  trying out a few examples we see that this unfortunately does not seem to work too well with self sentences which do not fit within twitter culture .
-                Predicted Keywords =  twitter <EOS>
-                Please enter input: After trying out a few different kinds of datasets, it became observable that keyword extraction was highly domain specific
-                Input              =  after trying out a few different kinds of it became that keyword extraction was highly domain specific
-                Predicted Keywords =  gold <EOS>
-                
-	4.   Compare different models on test dataset (needs to let the model train for multiple epochs / iterations)
+	    1.   Randomly evaluates some sentences (RANDOM_EVALUATION_AMOUNT) (see pictures/EvalModeRandom.png)
+		         0 ___________________
+		         Input              =  i nominate thegrandehipsta ariana rilakkuma contest
+		         Predicted Keywords =  ariana rilakkuma contest <EOS>
+		         Actual Keywords    =  ariana rilakkuma contest  
+		         1 ___________________
+		         Input              =  how to create a social media marketing strategy in easy steps 
+		         Predicted Keywords =  social media marketing <EOS>
+		         Actual Keywords    =  social media
+		         2 ___________________
+		         Input              =  for presidents day we ll be posting a series of videos with great presidential speeches in film and tv !
+		         Predicted Keywords =  day <EOS>
+		         Actual Keywords    =  presidents day
+
+		2.   Compare the loaded model on test dataset                     (see pictures/EvalModeValidationSet.png)
+			 STARTING EVALUATION ITERATION____________________________________________________________________________
+			 Sentence:    retweet the tity follow train in my last tweet ! ! 
+			 Keywords:    tity follow train
+			 Prediction:  follow train 
+
+			 Sentence:    visiting stjohnsshopping this friday ? look out for the smart swaps roadshow ! see where we ll be next 
+			 Keywords:    smart swaps
+			 Prediction:  smart swaps 
+			 0m 4s (- 0m 40s) (10 10%) Test eval score = 0.5500 (11/20)
+
+		3.   Evaluate User Input                                          (see pictures/EvalModeInput.png)
+			 STARTING CONSOLE INPUT EVALUATION____________________________________________________________________________
+			 Please enter input: Trying out a few examples ourself we see that this unfortunately does not seem to work too well with self formulated sentences which do not fit within Twitter culture.
+			 Input              =  trying out a few examples we see that this unfortunately does not seem to work too well with self sentences which do not fit within twitter culture .
+			 Predicted Keywords =  twitter <EOS>
+			 Please enter input: After trying out a few different kinds of datasets, it became observable that keyword extraction was highly domain specific
+			 Input              =  after trying out a few different kinds of it became that keyword extraction was highly domain specific
+			 Predicted Keywords =  gold <EOS>
+
+		4.   Compare different models on test dataset (needs to let the model train for multiple epochs / iterations)
 
 # Interesting Findings
 Even though we did not use any form of true semantic embedding (like word2vec, GloVe), the neural network seems to have picked up on underlying information which sometimes allows it to predict words close in meaning to the actual keywords. These sometimes fit even better than the actual keywords.
