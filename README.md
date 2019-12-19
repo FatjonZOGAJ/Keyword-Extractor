@@ -75,18 +75,18 @@ Testing/Evaluation specific:
 * TEST_EVALUATION_MODE: Try out different modes (values 1 to 4) to see the project in action. Except for Mode 4 all can be run from the default settings without any extra steps necessary (pre-trained model necessary).
 
 	    1.   Randomly evaluates some sentences (RANDOM_EVALUATION_AMOUNT) (see pictures/EvalModeRandom.png)
-		         0 ___________________
-		         Input              =  i nominate thegrandehipsta ariana rilakkuma contest
-		         Predicted Keywords =  ariana rilakkuma contest <EOS>
-		         Actual Keywords    =  ariana rilakkuma contest  
-		         1 ___________________
-		         Input              =  how to create a social media marketing strategy in easy steps 
-		         Predicted Keywords =  social media marketing <EOS>
-		         Actual Keywords    =  social media
-		         2 ___________________
-		         Input              =  for presidents day we ll be posting a series of videos with great presidential speeches in film and tv !
-		         Predicted Keywords =  day <EOS>
-		         Actual Keywords    =  presidents day
+		       0 ___________________
+		       Input              =  i nominate thegrandehipsta ariana rilakkuma contest
+		       Predicted Keywords =  ariana rilakkuma contest <EOS>
+		       Actual Keywords    =  ariana rilakkuma contest  
+		       1 ___________________
+		       Input              =  how to create a social media marketing strategy in easy steps 
+		       Predicted Keywords =  social media marketing <EOS>
+		       Actual Keywords    =  social media
+		       2 ___________________
+		       Input              =  for presidents day we ll be posting a series of videos with great presidential speeches in film and tv !
+		       Predicted Keywords =  day <EOS>
+		       Actual Keywords    =  presidents day
 
 		2.   Compare the loaded model on test dataset                     (see pictures/EvalModeValidationSet.png)
 			 STARTING EVALUATION ITERATION____________________________________________________________________________
