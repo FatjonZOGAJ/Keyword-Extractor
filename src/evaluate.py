@@ -173,13 +173,14 @@ def output_evaluation(input_sentence, encoder, decoder, input_lang, output_lang)
 
 
 
-def evaluate_console_input(encoder, decoder, input_lang, output_lang):
+def evaluate_console_input(encoder, decoder, input_lang, output_lang, train_input_lang_size):
     print('\nSTARTING CONSOLE INPUT EVALUATION____________________________________________________________________________' )
 
     while(True):
         try:
             inp = raw_input("Please enter input: ")
-            inp = normalize_string(inp)
-            output_evaluation(inp, encoder, decoder, input_lang, output_lang)
+            if inp != '\n':
+                inp = filter_sentence_containing_only_train_index([normalize_string(inp)], input_lang, train_input_lang_size)
+                output_evaluation(inp, encoder, decoder, input_lang, output_lang)
         except KeyError as e:
             print ('I got a KeyError - reason "%s"' % str(e))

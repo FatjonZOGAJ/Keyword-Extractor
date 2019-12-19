@@ -9,7 +9,7 @@ if USE_CUDA:
     USE_CUDA = torch.cuda.is_available()
 
 # training or testing
-TRAIN    = True
+TRAIN    = False
 # Used for training: creates a new model if true, else it takes the ones based on load_encoder & load_decoder
 NEW_MODEL = False
 
@@ -25,8 +25,9 @@ EVALUATE_ON_TESTING = True
 # 4.	Compare different models on test dataset (needs to let the model train for multiple epochs / iterations and then set the respective MODEL_ITERATIONS_... variables)
 TEST_EVALUATION_MODE = 3
 
+
 # runs a deni for TEST_EVALUATION_MODE 1-3
-DEMO_MODE = True
+DEMO_MODE = False
 
 DEBUG = False
 
@@ -63,9 +64,9 @@ N_SAVE_EVERY = 1000#0
 N_PLOT_EVERY = 1000#0
 
 #
-N_TEST_EVALUATION_EPOCHS = 1000
-N_TEST_EVALUATION_SAVE_EVERY = 100
-N_TEST_EVALUATION_PLOT_EVERY = 100
+N_TEST_EVALUATION_EPOCHS = 100
+N_TEST_EVALUATION_SAVE_EVERY = 10
+N_TEST_EVALUATION_PLOT_EVERY = 10
 
 
 

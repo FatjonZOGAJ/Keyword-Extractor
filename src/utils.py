@@ -121,8 +121,11 @@ def variables_from_pair(input_lang, output_lang, pair):
 def filter_sentence_containing_only_train_index(pair, input_lang, train_input_lang_size):
     filtered_sentence = []
     for word in pair[0].split(' '):
-        if input_lang.word2index[word] < train_input_lang_size:
-            filtered_sentence.append(word)
+        try:
+            if input_lang.word2index[word] < train_input_lang_size:
+                filtered_sentence.append(word)
+        except KeyError:        # word that has no index
+            pass
     return ' '.join(filtered_sentence)
 
 #_______________________________________________________________________________________________________________________

@@ -69,7 +69,7 @@ def start_evaluating():
         correctly_predicted_keywords_total / predicted_keywords_total, correctly_predicted_keywords_total,
         predicted_keywords_total))
     if DEMO_MODE or TEST_EVALUATION_MODE == 3:      # evaluating input
-        evaluate_console_input(encoder1, attn_decoder1, input_lang, output_lang)
+        evaluate_console_input(encoder1, attn_decoder1, input_lang, output_lang, train_input_lang_size)
     elif TEST_EVALUATION_MODE == 4:                 # compare different models on test dataset
         evaluation_iterations_multiple_models(input_lang, output_lang, test_pairs, train_input_lang_size,
                                               N_TEST_EVALUATION_EPOCHS, N_TEST_EVALUATION_SAVE_EVERY, N_TEST_EVALUATION_PLOT_EVERY, path ='models/' + date_folder)
