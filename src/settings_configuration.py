@@ -9,7 +9,7 @@ if USE_CUDA:
     USE_CUDA = torch.cuda.is_available()
 
 # training or testing
-TRAIN    = True
+TRAIN    = False
 # Used for training: creates a new model if true, else it takes the ones based on load_encoder & load_decoder
 NEW_MODEL = False
 
@@ -59,9 +59,9 @@ SOS_token = 0   # Start of Sentence has index 0
 EOS_token = 1   # End   of Sentence has index 1
 
 # training analysis + visualization
-N_EPOCHS = 10000#0#1000000
-N_SAVE_EVERY = 1000#0
-N_PLOT_EVERY = 1000#0
+N_EPOCHS = 1000#0   #1000000
+N_SAVE_EVERY = 100#0
+N_PLOT_EVERY = 100#0
 
 #
 N_TEST_EVALUATION_EPOCHS = 100
