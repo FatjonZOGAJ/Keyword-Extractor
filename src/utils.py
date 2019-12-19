@@ -91,7 +91,6 @@ def indexes_from_sentence(lang, sentence):
         indexes_list = []
         for word in sentence.split(' '):
             try:
-                #print('WORD', word, 'Index', lang.word2index[word])                                                         #TODO: CHANGED ORIGINAL
                 indexes_list.append(lang.word2index[word])
             except KeyError:
                 print('Word not yet in dictionary:', word)
@@ -169,7 +168,7 @@ class DecoderRNN(nn.Module):
         self.embedding   = nn.Embedding(output_size, hidden_size)
         self.gru         = nn.GRU(hidden_size, hidden_size)
         self.out         = nn.Linear(hidden_size, output_size)
-        self.softmax     = nn.LogSoftmax(dim=1)                                                                         #TODO: Set to output size?
+        self.softmax     = nn.LogSoftmax(dim=1)
 
     def forward(self, input, hidden):
         output         = self.embedding(input).view(1, 1, -1)
@@ -203,7 +202,7 @@ class AttnDecoderRNN(nn.Module):
 
         # Layers
         self.embedding    = nn.Embedding(self.output_size, self.hidden_size)
-        # TODO: LSTM
+        # Optional Extension: LSTM
         self.gru          = nn.GRU(self.hidden_size, self.hidden_size)
         #self.gru          = nn.GRU(self.hidden_size, self.hidden_size, n_layers, dropout=dropout_p)
 

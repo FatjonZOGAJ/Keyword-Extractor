@@ -60,15 +60,15 @@ def train(input_variable, target_variable, encoder, decoder, encoder_optimizer, 
             ni             = topi[0][0]
             decoder_input  = Variable(torch.LongTensor([[ni]]))
             decoder_input  = decoder_input.cuda() if USE_CUDA else decoder_input
-            loss          += criterion(decoder_output, target_variable[di])#.item()     #TODO: https://discuss.pytorch.org/t/cuda-error-out-of-memory/28123/2
+            loss          += criterion(decoder_output, target_variable[di])#.item()
 
             # ni contains the index of the found word
             if ni == EOS_token:
-                # TODO: EOS nicht returnen wegen Länge
+                # EOS nicht returnen wegen Länge
                 # decoded_words.append('<EOS>')
                 break
             else:
-                # decoded_words.append(output_lang.index2word[ni])                                                           TODO: CHANGED
+                # decoded_words.append(output_lang.index2word[ni])
                 decoded_words.append(output_lang.index2word[ni.item()])
 
             if ni == EOS_token: break
@@ -83,7 +83,7 @@ def train(input_variable, target_variable, encoder, decoder, encoder_optimizer, 
     encoder_optimizer.step()
     decoder_optimizer.step()
 
-    #return loss.data[0] / target_length                                                                                TODO: ORIGINAL CHANGED
+    #return loss.data[0] / target_length
     return loss.data / target_length, decoded_words
 
 

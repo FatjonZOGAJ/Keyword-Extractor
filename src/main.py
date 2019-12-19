@@ -1,5 +1,5 @@
 from settings_configuration import *
-from utils import *       # TODO OWN import
+from utils import *
 
 from train import *
 from evaluate import *

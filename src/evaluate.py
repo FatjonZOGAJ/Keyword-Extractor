@@ -17,7 +17,7 @@ def evaluate(encoder, decoder, sentence, input_lang, output_lang, max_length=MAX
     encoder_hidden  = encoder.init_hidden()
     encoder_outputs = Variable(torch.zeros(max_length, encoder.hidden_size))
     encoder_outputs = encoder_outputs.cuda() if USE_CUDA else encoder_outputs
-    #encoder_outputs = encoder_ouputs.cuda() if use_cuda else encoder_ouputs                                            TODO: ORIGINAL VERSION HAD AN ERROR
+    #encoder_outputs = encoder_ouputs.cuda() if use_cuda else encoder_ouputs
 
 
     for ei in range(input_length):
@@ -36,14 +36,14 @@ def evaluate(encoder, decoder, sentence, input_lang, output_lang, max_length=MAX
         )
 
         decoder_attentions[di] = decoder_attention.data
-        topv, topi             = decoder_output.data.topk(1)                                                            #TODO: within top k 10 ?
+        topv, topi             = decoder_output.data.topk(1)                                                            #TODO Extension: within top k 10 ?
         ni                     = topi[0][0]
 
         if ni == EOS_token:
             decoded_words.append('<EOS>')
             break
         else:
-            #decoded_words.append(output_lang.index2word[ni])                                                           TODO: CHANGED
+            #decoded_words.append(output_lang.index2word[ni])
             decoded_words.append(output_lang.index2word[ni.item()])
 
         decoder_input = Variable(torch.LongTensor([[ni]]))
