@@ -1,6 +1,6 @@
-from settings_configuration import  root_path
 import unittest
 from utils import *
+from settings_configuration import root_path
 class TestClass(unittest.TestCase):
 
     def test_data_format(self):
