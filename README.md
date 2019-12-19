@@ -114,9 +114,9 @@ Testing/Evaluation specific:
 Even though we did not use any form of true semantic embedding (like word2vec, GloVe), the neural network seems to have picked up on underlying information which sometimes allows it to predict words close in meaning to the actual keywords. These sometimes fit even better than the actual keywords.
 
 Some examples of this are:
-* ![Predicted android in relation to phone](pictures/finding_android.PNG) 
-* ![Found Samsung in relation to Blackberry](pictures/finding_samsung.PNG)
-* ![Found Pakistan in relation to Islamabad](pictures/finding_pakistan.PNG)
+* ![Predicted android in relation to phone](pictures/finding_android.png) 
+* ![Found Samsung in relation to Blackberry](pictures/finding_samsung.png)
+* ![Found Pakistan in relation to Islamabad](pictures/finding_pakistan.png)
 
 
 ## Work Breakdown Structure

@@ -21,8 +21,8 @@ class TestClass(unittest.TestCase):
 
     def test_language_stop_words(self):
         lang = Lang('test')
-        self.assertEqual(0, lang.word2index('<SOS>'))
-        self.assertEqual(1, lang.word2index('<EOS>'))
+        self.assertEqual('SOS', lang.index2word[0])
+        self.assertEqual('EOS', lang.index2word[1])
 
     def test_language_size(self):
         lang = Lang('test')
@@ -52,13 +52,21 @@ class TestClass(unittest.TestCase):
         lang = Lang('test')
         lang.add_sentence('We now have seven words')
         previous_size = lang.n_words
-        pair = ['Words was at the end.', 'keyword']
+        pair = ['words was at the end.', 'keyword']
 
-        onwWordSentence = filter_sentence_containing_only_train_index(pair, lang, previous_size)
-        self.assertEqual(1, len(onwWordSentence))
-#
-#
- #   test_train_validation_all_indizes
-#
+        oneWordSentence = filter_sentence_containing_only_train_index(pair, lang, previous_size)
+        self.assertEqual(1, len(oneWordSentence.split(' ')))
+
+    def test_train_validation_all_indizes(self):
+        sentence = 'We now have seven words'
+        lang = Lang('test')
+        lang.add_sentence(sentence)
+        previous_size = lang.n_words
+        pair = [sentence, 'keyword']
+
+        allWordSentence = filter_sentence_containing_only_train_index(pair, lang, previous_size)
+        self.assertEqual(pair[0], allWordSentence)
+        self.assertEqual(len(sentence.split(' ')), len(allWordSentence.split(' ')))
+
 if __name__ == '__main__':
     unittest.main()
