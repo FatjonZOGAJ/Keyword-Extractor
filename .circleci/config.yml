@@ -47,7 +47,7 @@ jobs:
       - run:
           name: run tests
           command: |
-            . venv/bin/activate
+      #. venv/bin/activate
             pipenv run python -m unittest discover
       # python test/data_format_test.py
 
