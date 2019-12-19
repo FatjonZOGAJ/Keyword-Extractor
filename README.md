@@ -29,9 +29,15 @@ Training data Example:
 ### Error metric target
 Considering the fact that we not only try to find one of the actual keywords, but all of them, we have set our correctly predicted percentage target to **0,3.** Thus we are happy if we are able to correctly predict 30 percent of the actual keywords. 
 ### Error metric achieved
-Much to our surprise we were able to achieve correctly predicted percentage values of around 50 percent on the validation dataset. This is after running it on the training set for close to 200.000 iterations which is approximately twice the training dataset. One iteration in this case means that one line of the training dataset was randomly chosen. 
+Much to our surprise we were able to achieve correctly predicted percentage values of around 50 percent on the validation dataset. This is after running it on the training set for close to 200.000 iterations which is approximately twice the size of the training dataset. One iteration in this case means that one line of the training dataset was randomly chosen. 
 
-% picture
+During training we have plotted evaluated the loss as well as the error metric. We have decided to call it quits after 200.000 iterations (save model every 5000 iterations -> 40 models) to ensure that it would not overfit to our training data.
+
+![Achieved training Error metric](pictures/195000.png)
+
+Now looking at the error metric on the validation set we can see that this seems to converge after a certain point at which self defined early stopping kicked in. 
+
+![Achieved validation Error metric](pictures/MODELCOMPARISON.png)
 
 Trying out a few examples ourself we see that this unfortunately does not seem to work too well with self formulated sentences which do not fit within Twitter culture. This could be explained by the fact that even though the training and validation datasets are different, they resemble each other in styling and lingo. 
 
@@ -40,8 +46,9 @@ This could be ameliorated by gathering more data, finetuning the neural network 
 
 ## Project structure & How to
 * src/settings_configuration.py
+
 Contains all the necessary parameters/information to try out and test this project.  
-To run a short demo showing a short visualization and analysis on the test dataset (testTweet-keyword.txt) simply run the main method after setting the directory in line 4 of settings_configuration.py
+To run a short demo showing a short visualization and analysis on the test dataset (testTweet-keyword.txt) simply run the main method after setting the directory in line 4 of settings_configuration.py. A prerequisite for this is, that there exists a pre-trained model to load (see parameters MODEL_ITERATIONS_VERSION, date_folder) 
 
 ### Some of the parameters which can be tried out are as follows.
 * TRAIN: defines if we start training or start testing our model 
@@ -52,11 +59,20 @@ Training specific:
 
 Testing/Evaluation specific:
 * EVALUATE_ON_TESTING: lets us define if we want to evaluate on training (trnTweet-keyword.txt) or validation (testTweet-keyword.txt) dataset during our testing (see TRAIN = FALSE)
-* TEST_EVALUATION_MODE: Try out different modes (values 1 to 4) to see the project in action. Except for Mode 4 all can be run from the default settings without any extra steps necessary.
-	1.   Randomly evaluate some sentences  
+* TEST_EVALUATION_MODE: Try out different modes (values 1 to 4) to see the project in action. Except for Mode 4 all can be run from the default settings without any extra steps necessary (pre-trained model necessary).
+
+
+    1.   Randomly evaluate some sentences  
 	2.   Compare the loaded model on test dataset  
 	3.   Evaluate User Input  
 	4.   Compare different models on test dataset (needs to let the model train for multiple epochs / iterations)
+
+# Interesting Findings
+Even though we did not use any form of true semantic embedding (like word2vec, GloVe), the neural network seems to have picked up on underlying information which sometimes allows it to predict words close in meaning to the actual keywords. These sometimes fit even better than the actual keywords.
+
+Some examples of this are:
+* ![Achieved validation Error metric](pictures/finding_android.PNG) 
+
 
 ## Work Breakdown Structure
 |Task|Time estimate|Actual time EX1|Actual time EX2|
