@@ -31,7 +31,7 @@ Considering the fact that we not only try to find one of the actual keywords, bu
 ### Error metric achieved
 Much to our surprise we were able to achieve correctly predicted percentage values of around 50 percent on the validation dataset. This is after running it on the training set for close to 200.000 iterations which is approximately twice the size of the training dataset. One iteration in this case means that one line of the training dataset was randomly chosen. 
 
-During training we have plotted evaluated the loss as well as the error metric. We have decided to call it quits after 200.000 iterations (save model every 5000 iterations -> 40 models) to ensure that it would not overfit to our training data.
+During training we have evaluated and plotted the loss as well as the error metric. We have decided to call it quits after 200.000 iterations (save model every 5000 iterations -> 40 models) to ensure that it would not overfit to our training data.
 
 ![Achieved training Error metric](pictures/195000.png)
 
@@ -41,14 +41,14 @@ Now looking at the error metric on the validation set we can see that this seems
 
 Trying out a few examples ourself we see that this unfortunately does not seem to work too well with self formulated sentences which do not fit within Twitter culture. This could be explained by the fact that even though the training and validation datasets are different, they resemble each other in styling and lingo. 
 
-This could be ameliorated by gathering more data, finetuning the neural network or letting it train even longer. Another way to improve this, would be to use some other form of embedding which places semantically close words next to each other in a vector space. GoogleNews-vectors-negative300.txt contains 3 million words with 300 features each which has already been trained with Google News data (100 billion words; https://code.google.com/archive/p/word2vec/). Converting the file from binary to txt using gensim (see preprocessing) took 30 mins and resulted in a 11GB file text, which is why it was skipped for this project.
+This could be ameliorated by gathering more data, finetuning the neural network or letting it train even longer. Another way to improve this, would be to use some other form of embedding which places semantically close words next to each other in a vector space. GoogleNews-vectors-negative300.txt contains 3 million words with 300 features each which has already been trained with Google News data (100 billion words; https://code.google.com/archive/p/word2vec/). Simply converting the file from binary to txt using gensim (see preprocessing in original repository) took 30 mins and resulted in a 11GB file text; this huge dimensionality is why it was skipped for this project.
 
 
 ## Project structure & How to
 * src/settings_configuration.py
 
 Contains all the necessary parameters/information to try out and test this project.  
-To run a short demo showing a short visualization and analysis on the test dataset (testTweet-keyword.txt) simply run the main method after setting the directory in line 4 of settings_configuration.py. A prerequisite for this is, that there exists a pre-trained model to load (see parameters MODEL_ITERATIONS_VERSION, date_folder) 
+To run a short demo showing a short visualization and analysis on the test dataset (testTweet-keyword.txt) simply run the main method after setting the directory in line 4 of settings_configuration.py. A prerequisite for this is, that there exists a pre-trained model to load (see parameters MODEL_ITERATIONS_VERSION, date_folder).
 
 ### Some of the parameters which can be tried out are as follows.
 * TRAIN: defines if we start training or start testing our model 
@@ -124,8 +124,8 @@ Some examples of this are:
 |:--|--:|--:|--:|
 | Find topic and create plan|10h| **25h** |
 | Understand Paper | | |10h|
-| Dataset collection + preparation| 5h | | 5h|
-| Network design + implementation| 20h | | 20h|
+| Dataset collection + preparation| 5h | | 2h|
+| Network design + implementation| 20h | | 18h|
 | Training + finetuning| 15h | | 13h |
 | Building application | 5h | | |
 | Report + presentation| *14h | | |
