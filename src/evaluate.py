@@ -16,7 +16,7 @@ def evaluate(encoder, decoder, sentence, input_lang, output_lang, max_length=MAX
     input_length    = input_variable.size()[0]
     encoder_hidden  = encoder.init_hidden()
     encoder_outputs = Variable(torch.zeros(max_length, encoder.hidden_size))
-    encoder_outputs = encoder_outputs.cuda() if use_cuda else encoder_outputs
+    encoder_outputs = encoder_outputs.cuda() if USE_CUDA else encoder_outputs
     #encoder_outputs = encoder_ouputs.cuda() if use_cuda else encoder_ouputs                                            TODO: ORIGINAL VERSION HAD AN ERROR
 
 
@@ -25,7 +25,7 @@ def evaluate(encoder, decoder, sentence, input_lang, output_lang, max_length=MAX
         encoder_outputs[ei]            = encoder_outputs[ei] + encoder_output[0][0]
 
     decoder_input      = Variable(torch.LongTensor([[SOS_token]]))
-    decoder_input      = decoder_input.cuda() if use_cuda else decoder_input
+    decoder_input      = decoder_input.cuda() if USE_CUDA else decoder_input
     decoder_hidden     = encoder_hidden
     decoded_words      = []
     decoder_attentions = torch.zeros(max_length, max_length)
@@ -47,7 +47,7 @@ def evaluate(encoder, decoder, sentence, input_lang, output_lang, max_length=MAX
             decoded_words.append(output_lang.index2word[ni.item()])
 
         decoder_input = Variable(torch.LongTensor([[ni]]))
-        decoder_input = decoder_input.cuda() if use_cuda else decoder_input
+        decoder_input = decoder_input.cuda() if USE_CUDA else decoder_input
 
     return decoded_words, decoder_attentions[:di + 1]
 

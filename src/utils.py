@@ -7,7 +7,7 @@ from torch.autograd import Variable
 import torch.nn.functional as F
 
 
-from settings_configuration import MAX_LENGTH, root_path, use_cuda, TRAIN, EOS_token, SOS_token
+from settings_configuration import MAX_LENGTH, root_path, USE_CUDA, TRAIN, EOS_token, SOS_token
 # Language class to create own embedding
 # saves all the words with their amount of occurences
 # creates two dictionaries
@@ -106,7 +106,7 @@ def variable_from_sentence(lang, sentence):
 
     var = Variable(torch.LongTensor(indexes).view(-1, 1))
 
-    if use_cuda:
+    if USE_CUDA:
         var = var.cuda()
 
     return var
@@ -152,7 +152,7 @@ class EncoderRNN(nn.Module):
         hidden = Variable(torch.zeros(1, 1, self.hidden_size))
 
 
-        if use_cuda:
+        if USE_CUDA:
             hidden = hidden.cuda()
 
         return hidden
@@ -179,7 +179,7 @@ class DecoderRNN(nn.Module):
     def init_hidden(self):
         result = Variable(torch.zeros(1, 1, self.hidden_size))
 
-        if use_cuda:
+        if USE_CUDA:
             return result.cuda()
         else:
             return result
@@ -222,7 +222,7 @@ class AttnDecoderRNN(nn.Module):
     def init_hidden(self):
         result = Variable(torch.zeros(1, 1, self.hidden_size))
 
-        if use_cuda:
+        if USE_CUDA:
             return result.cuda()
         else:
             return result

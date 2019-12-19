@@ -4,12 +4,12 @@ import os
 os.chdir('C:/Users/Fatjon/Documents/AppliedDeepLearning')
 root_path = os.getcwd()
 
-use_cuda = True #False
-if use_cuda:
-    use_cuda = torch.cuda.is_available()
+USE_CUDA = True #False
+if USE_CUDA:
+    USE_CUDA = torch.cuda.is_available()
 
 # training or testing
-TRAIN    = False
+TRAIN    = True
 # Used for training: creates a new model if true, else it takes the ones based on load_encoder & load_decoder
 NEW_MODEL = False
 
@@ -31,7 +31,7 @@ DEMO_MODE = True
 DEBUG = False
 
 
-sentence_keyword_data = 'trnTweet-keyword' #'tweet-keyword' #'keyword-data' #                                           # train data
+sentence_keyword_data = 'trnTweet-keyword'                                                                              # train data
 sentence_keyword_data_test = 'testTweet-keyword'                                                                        #  test data
 
 # which model to load
@@ -49,10 +49,6 @@ pre_test_text, post_test_text = sentence_keyword_data_test.split('-')           
 
 encoder_load_path = root_path + '/models/' + date_folder + '/' + MODEL_ITERATIONS_VERSION + 'encoder.pt'
 decoder_load_path = root_path + '/models/' + date_folder + '/' + MODEL_ITERATIONS_VERSION + 'decoder.pt'
-
-# best pretrained for tweet-keyword.txt
-#encoder_load_path = root_path + '/src/models/encoder70000.pt'# + '2019-12-17-2356' + '/'+ load_encoder
-#decoder_load_path = root_path + '/src/models/decoder70000.pt'# + '2019-12-17-2356' + '/'+ load_decoder
 
 # General parameters________________________________
 
@@ -75,7 +71,7 @@ N_TEST_EVALUATION_PLOT_EVERY = 100
 
 # Network parameters__________________________________
 # determines how often the actual values is passed to the Decoder instead of the predicted one
-learning_rate = 0.01
+LEARNING_RATE = 0.01
 teacher_forcing_ratio = 0.5
 
 optimizer_conf = 'sgd' #'adam'  #
