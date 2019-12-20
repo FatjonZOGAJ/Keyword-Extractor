@@ -3,8 +3,8 @@ In exercise 2 we try to implement the plan of Exercise 1. The goal here was narr
 Its primary function will be to suggest keywords based on a short text with limited size (like on Twitter, instagram, etc.). 
 
 ## General Information
-* Having heard that Decoder-Encoder RNNs can be used to translate sentences from one language to another in the course _Applied Deep Learning_, I have wanted to see if this could be used to do some sort of semantic keyword extraction. This project is based on the PyTorch Tutorial for sequence to sequence Networks and tries to _translate_ tweets to their respective keyswords. 
-* After trying out a few different kinds of datasets, it became observable that keyword extraction was highly domain specific. Due to this I have focused on the Twitter Dataset found in the following chinese paper ([Link paper](http://jkx.fudan.edu.cn/~qzhang/paper/keyphrase.emnlp2016.pdf)). Another thing that can be observed, is that, even though we reach a respectable prediction accuracy on the validation dataset (testTweet-keyword.txt) after training only on the training dataset (trnTweet-keyword.txt), it does not work ideally for own formulated tweets. It seems that the gathered data seems to have a specific lingo in common, which the Neural Network is able to detect within the training and validation dataset. 
+* Having heard that Decoder-Encoder RNNs can be used to translate sentences from one language to another in the course _Applied Deep Learning_, we have wanted to see if this could be used to do some sort of semantic keyword extraction. This project is based on the PyTorch Tutorial for sequence to sequence Networks and tries to _translate_ tweets to their respective keyswords. 
+* After trying out a few different kinds of datasets, it became observable that keyword extraction was highly domain specific. Due to this we have focused on the Twitter Dataset found in the following chinese paper ([Link paper](http://jkx.fudan.edu.cn/~qzhang/paper/keyphrase.emnlp2016.pdf)). Another thing that can be observed, is that, even though we reach a respectable prediction accuracy on the validation dataset (testTweet-keyword.txt) after training only on the training dataset (trnTweet-keyword.txt), it does not work ideally for own formulated tweets. It seems that the gathered data seems to have a specific lingo in common, which the Neural Network is able to detect within the training and validation dataset. 
 * The created embedding simply uses a self defined language dictionary which maps words to indices and vice versa. 
 
 ## Error Metric
@@ -27,17 +27,22 @@ Training data Example:
 -> correctly predicted percentage = 0,66
 
 ### Error metric target
-Considering the fact that we not only try to find one of the actual keywords, but all of them, we have set our correctly predicted percentage target to **0,3.** Thus we are happy if we are able to correctly predict 30 percent of the actual keywords. 
+Considering the fact that we not only try to find one of the actual keywords, but all of them, we have set our correctly predicted percentage target to **0,3.** Thus we are happy if we are able to correctly predict 30 percent of the actual keywords (i.e. 100 sentences with 3 keywords each: try to correctly predict around 100 keywords). 
 ### Error metric achieved
-Much to our surprise we were able to achieve correctly predicted percentage values of around 50 percent on the validation dataset. This is after running it on the training set for close to 200.000 iterations which is approximately twice the size of the training dataset. One iteration in this case means that one line of the training dataset was randomly chosen. 
+Much to our surprise we were able to achieve correctly predicted percentage values of over 50 percent on the validation dataset. This is after running it on the training set for close to 200.000 iterations which is approximately twice the size of the training dataset. One iteration in this case means that one line of the training dataset was randomly chosen. 
 
-During training we have evaluated and plotted the loss as well as the error metric. We have decided to call it quits after 200.000 iterations (save model every 5000 iterations -> 40 models) to ensure that it would not overfit to our training data.
+During training we have evaluated and plotted the loss as well as the error metric on the training dataset. We have decided to call it quits after 200.000 iterations (save model every 5000 iterations -> 40 models) to ensure that it would not overfit to our training data.
 
 ![Achieved training Error metric](pictures/195000.png)
 
-Now looking at the error metric on the validation set we can see that this seems to converge after a certain point at which self defined early stopping kicked in. 
+Now looking at the error metric on the validation set we can see that this seems to similarly progress and converge after a certain point at which self defined early stopping kicked in. 
 
 ![Achieved validation Error metric](pictures/MODELCOMPARISON.png)
+
+Training the model for another 100.000 iterations (save model every 5000 iterations -> 20 models) seems to have decreased the loss even further on the training dataset. Looking at the correctly predicted percentage on the validation dataset below, we see that it seems to oscillate around 0,53 (min: 45%, max 60%). Thus we say that we have achieved an error metric of above 50 percent on our validation dataset.
+
+![Achieved validation Error metric after another 100000 iterations](pictures/195000+100000 testing.png)
+
 
 Trying out a few examples ourself we see that this unfortunately does not seem to work too well with self formulated sentences which do not fit within Twitter culture. This could be explained by the fact that even though the training and validation datasets are different, they resemble each other in styling and lingo. 
 
@@ -47,8 +52,8 @@ This could be ameliorated by gathering more data, finetuning the neural network 
 ## Project structure & How to
 * src/settings_configuration.py
 
-Contains all the necessary parameters/information to try out and test this project.  
-To run a short demo showing a short visualization and analysis on the test dataset (testTweet-keyword.txt) simply run the main method after setting the directory in line 4 of settings_configuration.py. A prerequisite for this is, that there exists a pre-trained model to load (see parameters MODEL_ITERATIONS_VERSION, date_folder).
+Contains all the necessary parameters which were changed/finetuned and information to try out and test this project.  
+To run a short demo showing a short visualization and analysis on the test dataset (testTweet-keyword.txt) simply run the main method after setting the directory in line 4 of settings_configuration.py. A prerequisite for this is, that there exists a pre-trained model to load (see parameters MODEL_ITERATIONS_VERSION, date_folder). To try it out with my pretrained model, copy this folder ([OneDrive Link](https://1drv.ms/u/s!ApPEwo6udEbQhe0K-FGEXV49RM4z8w?e=o0Lpdo)) into the /models directory.
 
 ### Some of the parameters which can be tried out are as follows.
 * TRAIN: defines if we start training or start testing our model 
@@ -59,7 +64,7 @@ Training specific:
 
 
 	    Started Training_______________________________________
-	    11m 9s (- 1105m 8s) (5000 1%) Loss: 5.0906 Train eval score = 0.0615 (254/4131)
+	    11m  9s (- 1105m  8s) ( 5000 1%) Loss: 5.0906 Train eval score = 0.0615 (254/4131)
 	    22m 19s (- 1094m 12s) (10000 2%) Loss: 4.5539 Train eval score = 0.1164 (509/4373)
 	    33m 27s (- 1081m 54s) (15000 3%) Loss: 4.3795 Train eval score = 0.1183 (505/4268)
 	    44m 35s (- 1070m 13s) (20000 4%) Loss: 4.2944 Train eval score = 0.1282 (531/4142)
@@ -108,7 +113,7 @@ Testing/Evaluation specific:
 			 Input              =  after trying out a few different kinds of it became that keyword extraction was highly domain specific
 			 Predicted Keywords =  gold <EOS>
 
-		4.   Compare different models on test dataset (needs to let the model train for multiple epochs / iterations)
+		4.   Compare different models on test dataset (needs to let the model train for multiple epochs / iterations; was used to create the plots)
 
 # Interesting Findings
 Even though we did not use any form of true semantic embedding (like word2vec, GloVe), the neural network seems to have picked up on underlying information which sometimes allows it to predict words close in meaning to the actual keywords. These sometimes fit even better than the actual keywords.

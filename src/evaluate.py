@@ -52,7 +52,7 @@ def evaluate(encoder, decoder, sentence, input_lang, output_lang, max_length=MAX
     return decoded_words, decoder_attentions[:di + 1]
 
 def evaluation_iterations(encoder, decoder, input_lang, output_lang, pairs, train_input_lang_size, n_epochs, n_save_every=1000, n_plot_tick_every=200, path =''):
-    print('\nSTARTING EVALUATION ITERATION____________________________________________________________________________' )
+    print('STARTING EVALUATION ITERATION____________________________________________________________________________' )
 
     start = time.time()
     max_prints = 3
@@ -95,7 +95,7 @@ def evaluation_iterations(encoder, decoder, input_lang, output_lang, pairs, trai
             save_predicted_keywords_total += plot_predicted_keywords_total
 
 
-            print('%s (%d %d%%) Test eval score = %.4f (%d/%d)' % (
+            print('\t%s (%d %d%%) Test eval score = %.4f (%d/%d)' % (
                 time_since(start, iter / n_epochs), iter, iter / n_epochs * 100,
                 plot_correct_predictions_avg, plot_correctly_predicted_keywords_total,
                 plot_predicted_keywords_total

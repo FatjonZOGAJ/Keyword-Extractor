@@ -1,7 +1,7 @@
 import torch
 import os
 
-os.chdir('C:/Users/Fatjon/Documents/AppliedDeepLearning')
+os.chdir('C:/Users/Fatjon/Documents/AppliedDeepLearning')                                                               # change root
 root_path = os.getcwd()
 
 USE_CUDA = True #False
@@ -11,12 +11,12 @@ if USE_CUDA:
 # training or testing
 TRAIN    = False
 # Used for training: creates a new model if true, else it takes the ones based on load_encoder & load_decoder
-NEW_MODEL = False
+NEW_MODEL = False                                                                                                       # set this to true if you want to try training and have not downloaded the model from OneDrive
 
-# evaluates on training dataset during training (if false it trains without evaluating)
+# evaluates on training dataset during training
 EVALUATE_ON_TRAINING_WHILE_TRAINING = True
 
-# evaluates on test/validation dataset during testing if true else on training data set
+# evaluates on test/validation dataset during training (if true validation score will be plotted, else the evaluation of the training data)
 EVALUATE_ON_TESTING = True
 
 # 1.	Randomly evaluate some sentences
@@ -25,13 +25,11 @@ EVALUATE_ON_TESTING = True
 # 4.	Compare different models on test dataset (needs to let the model train for multiple epochs / iterations and then set the respective MODEL_ITERATIONS_... variables)
 TEST_EVALUATION_MODE = 1
 
-
-# runs a deni for TEST_EVALUATION_MODE 1-3
+# runs a demo for TEST_EVALUATION_MODE 1-3
 DEMO_MODE = True
 
-DEBUG = False
 
-
+# ______________________________________________________
 sentence_keyword_data = 'trnTweet-keyword'                                                                              # train data
 sentence_keyword_data_test = 'testTweet-keyword'                                                                        #  test data
 
@@ -39,7 +37,7 @@ sentence_keyword_data_test = 'testTweet-keyword'                                
 MODEL_ITERATIONS_VERSION = '195000'                                                                                     # longest trained: 195000 (best correct prediction percentage: 180000)
 date_folder = '2019-12-18-0349'
 
-# MODEL_COMPARISONS_EVALUATION = 1
+# used for MODEL_COMPARISONS_EVALUATION = 4
 MODEL_ITERATIONS_START = 185000
 MODEL_ITERATIONS_END = 195000
 MODEL_ITERATIONS_STEP =  5000
@@ -59,23 +57,23 @@ SOS_token = 0   # Start of Sentence has index 0
 EOS_token = 1   # End   of Sentence has index 1
 
 # training analysis + visualization
-N_EPOCHS = 1000#0   #1000000
-N_SAVE_EVERY = 100#0
-N_PLOT_EVERY = 100#0
+N_EPOCHS =    1000#0  #200000
+N_SAVE_EVERY = 100#0    #5000
+N_PLOT_EVERY = 100#0    #5000
 
 #
-N_TEST_EVALUATION_EPOCHS = 100
-N_TEST_EVALUATION_SAVE_EVERY = 10
-N_TEST_EVALUATION_PLOT_EVERY = 10
+N_TEST_EVALUATION_EPOCHS = 300
+N_TEST_EVALUATION_SAVE_EVERY = 100
+N_TEST_EVALUATION_PLOT_EVERY = 100
 
 
 
 # Network parameters__________________________________
-# determines how often the actual values is passed to the Decoder instead of the predicted one
 LEARNING_RATE = 0.01
+# determines how often the actual values is passed to the Decoder instead of the predicted one
 teacher_forcing_ratio = 0.5
 
-optimizer_conf = 'sgd' #'adam'  #
+optimizer_conf =  'sgd' #'adam'  # sgd works better with 195000
 
 
 # amount of hidden states

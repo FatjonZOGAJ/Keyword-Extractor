@@ -12,13 +12,13 @@ print("TRAIN: ", TRAIN)
 
 # input_lang = tweet Dictionary, output_lang = Keyword Dictionary
 input_lang, output_lang, pairs = prepare_data(pre_text, post_text, False)
+test_pairs = []
 
 # indizes of only the training words
 train_input_lang_size = input_lang.n_words
 
 # use words/pairs from validation dataset
 if EVALUATE_ON_TESTING:
-    global test_pairs
     trash1, trash2, test_pairs = prepare_data(pre_test_text, post_test_text, False)
 
     for pair in test_pairs:
@@ -48,7 +48,7 @@ def start_training():
         encoder1 = encoder1.cuda()
         attn_decoder1 = attn_decoder1.cuda()
 
-    train_interations(pairs, input_lang, output_lang, encoder1, attn_decoder1, N_EPOCHS, n_save_every=N_SAVE_EVERY, n_plot_tick_every=N_PLOT_EVERY,
+    train_interations(pairs, test_pairs, train_input_lang_size, input_lang, output_lang, encoder1, attn_decoder1, N_EPOCHS, n_save_every=N_SAVE_EVERY, n_plot_tick_every=N_PLOT_EVERY,
                       learning_rate=LEARNING_RATE, path='models/' + start_time)
 
     torch.save(encoder1, 'models/' + start_time + '/encoder.pt')
