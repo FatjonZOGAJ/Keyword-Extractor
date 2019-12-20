@@ -41,7 +41,7 @@ Now looking at the error metric on the validation set we can see that this seems
 
 Training the model for another 100.000 iterations (save model every 5000 iterations -> 20 models) seems to have decreased the loss even further on the training dataset. Looking at the correctly predicted percentage on the validation dataset below, we see that it seems to oscillate around 0,53 (min: 45%, max 60%). Thus we say that we have achieved an error metric of above 50 percent on our validation dataset.
 
-![Achieved validation Error metric after another 100000 iterations](pictures/195000+100000 testing.png)
+![Achieved validation Error metric after another 100000 iterations](pictures/195000+100000testing.png)
 
 
 Trying out a few examples ourself we see that this unfortunately does not seem to work too well with self formulated sentences which do not fit within Twitter culture. This could be explained by the fact that even though the training and validation datasets are different, they resemble each other in styling and lingo. 
