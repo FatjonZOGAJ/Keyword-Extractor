@@ -16,7 +16,8 @@ NEW_MODEL = False                                                               
 # evaluates on training dataset during training
 EVALUATE_ON_TRAINING_WHILE_TRAINING = True
 
-# evaluates on test/validation dataset during training (if true validation score will be plotted, else the evaluation of the training data)
+# evaluates on      test/validation dataset during training (if true validation score will be plotted, else the evaluation of the training data)
+# defines if we evaluate on testing dataset during testing
 EVALUATE_ON_TESTING = True
 
 # 1.	Randomly evaluate some sentences
