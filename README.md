@@ -55,7 +55,7 @@ This could be ameliorated by gathering more data, finetuning the neural network 
 Contains all the necessary parameters which were changed/finetuned and information to try out and test this project.  
 To run a short demo showing a short visualization and analysis on the test dataset (testTweet-keyword.txt) simply run the main method after setting the directory in line 4 of settings_configuration.py. A prerequisite for this is, that there exists a pre-trained model to load (see parameters MODEL_ITERATIONS_VERSION, date_folder). To try it out with my pretrained model, copy the content of this folder ([OneDrive Link](https://1drv.ms/u/s!ApPEwo6udEbQhe0K-FGEXV49RM4z8w?e=o0Lpdo); >150MB which is why it cannot be pushed onto Git) into the /models/2019-12-18-0349 directory.
 
-### Some of the parameters which can be tried out are as follows.
+#### Some of the parameters which can be tried out are as follows.
 * TRAIN: defines if we start training or start testing our model 
 
 Training specific:
