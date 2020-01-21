@@ -136,21 +136,23 @@ def evaluation_iterations_multiple_models(input_lang, output_lang, pairs, train_
 
     model_comparison_save_plot(plot_correct_predictions_percentages, path + '/MODELCOMPARISON' + start_time + '.png', MODEL_ITERATIONS_START, MODEL_ITERATIONS_END, MODEL_ITERATIONS_STEP)
 
-def start_random_evaluation_print(pairs, test_pairs, encoder, decoder, input_lang, output_lang, train_input_lang_size):
+def start_random_evaluation_print(pairs, test_pairs, encoder, decoder, input_lang, output_lang, train_input_lang_size, PREDICTIONS = None):
     print('\nSTARTING RANDOM EVALUATION____________________________________________________________________________' )
     i = 0
     while i < RANDOM_EVALUATION_AMOUNT:
         print(str(i) + ' ___________________')
 
         if EVALUATE_ON_TESTING:
-            evaluate_randomly(test_pairs, encoder, decoder, input_lang, output_lang, train_input_lang_size)
+            PREDICTIONS = evaluate_randomly(test_pairs, encoder, decoder, input_lang, output_lang, train_input_lang_size, PREDICTIONS)
         else:
-            evaluate_randomly(pairs,      encoder, decoder, input_lang, output_lang, train_input_lang_size)
+            PREDICTIONS = evaluate_randomly(pairs,      encoder, decoder, input_lang, output_lang, train_input_lang_size, PREDICTIONS)
 
         i = i + 1
 
+    return PREDICTIONS
 
-def evaluate_randomly(pairs, encoder, decoder, input_lang, output_lang, train_input_lang_size):
+
+def evaluate_randomly(pairs, encoder, decoder, input_lang, output_lang, train_input_lang_size, PREDICTIONS = None):
 
     pair = random.choice(pairs)
     filtered_sentence = pair[0]
@@ -159,7 +161,16 @@ def evaluate_randomly(pairs, encoder, decoder, input_lang, output_lang, train_in
         filtered_sentence = filter_sentence_containing_only_train_index(pair, input_lang, train_input_lang_size)
 
     prediction = output_evaluation(filtered_sentence, encoder, decoder, input_lang, output_lang)
+    prediction.remove("<EOS>")
+    prediction = ' '.join(prediction)
+    if not PREDICTIONS is None:
+        PREDICTIONS.append({
+            'input': filtered_sentence,
+            'keywords': pair[1],
+            'prediction': prediction
+        })
     print('Actual Keywords    = ', pair[1])
+    return PREDICTIONS
 
 
 def output_evaluation(input_sentence, encoder, decoder, input_lang, output_lang):
@@ -184,3 +195,7 @@ def evaluate_console_input(encoder, decoder, input_lang, output_lang, train_inpu
                 output_evaluation(inp, encoder, decoder, input_lang, output_lang)
         except KeyError as e:
             print ('I got a KeyError - reason "%s"' % str(e))
+
+def evaluate_input(inp, encoder, decoder, input_lang, output_lang, train_input_lang_size):
+    inp = filter_sentence_containing_only_train_index([normalize_string(inp)], input_lang, train_input_lang_size)
+    return output_evaluation(inp, encoder, decoder, input_lang, output_lang)

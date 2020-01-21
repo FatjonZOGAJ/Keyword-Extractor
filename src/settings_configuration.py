@@ -29,6 +29,9 @@ TEST_EVALUATION_MODE = 1
 # runs a demo for TEST_EVALUATION_MODE 1-3
 DEMO_MODE = True
 
+# if used with website
+SERVER_MODE = True
+
 
 # ______________________________________________________
 sentence_keyword_data = 'trnTweet-keyword'                                                                              # train data
@@ -52,7 +55,7 @@ decoder_load_path = root_path + '/models/' + date_folder + '/' + MODEL_ITERATION
 
 # General parameters________________________________
 
-RANDOM_EVALUATION_AMOUNT = 20
+RANDOM_EVALUATION_AMOUNT = 10
 
 SOS_token = 0   # Start of Sentence has index 0
 EOS_token = 1   # End   of Sentence has index 1
