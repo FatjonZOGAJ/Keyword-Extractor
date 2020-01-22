@@ -1,8 +1,3 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
 # Applied Deep Learning Final Report
 As part of exercise 3 we have written a report containing an informative summary about our implemented _Keyword-Extractor_.
 We have decided on taking on the problem of “Keyword Extraction” with the project type “Bring your own method”.
@@ -26,7 +21,7 @@ Due to the sheer amount of data one needs to analyze to be able to find meaningf
 are necessary which is why Deep Learning poses an interesting opportunity.
 
 * Having heard that Decoder-Encoder RNNs can be used to translate sentences from one language to another in the course _Applied Deep Learning_, we have wanted to see if this could be used to do some sort of semantic keyword extraction. This project is based on the PyTorch Tutorial for sequence to sequence Networks and tries to _translate_ tweets to their respective keywords.
-
+f
 * We have created a Twitter Hashtag Extractor/Suggestor, which is able to suggest keywords based on a short text with
 limited size (like on Twitter, instagram, etc.).
 We compared different kinds of Neural networks by trying out different parameters and network architectures.
