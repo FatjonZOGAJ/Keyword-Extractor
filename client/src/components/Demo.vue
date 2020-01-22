@@ -76,7 +76,7 @@ export default {
       const splitKeywords = keywords.split(' ');
       for (let i = 0; i < splitKeywords.length; i += 1) {
         if (splitKeywords[i].trim().length > 1) {
-          replacement = '<strong>'.concat(splitKeywords[i], '</strong>');
+          replacement = '<b>'.concat(splitKeywords[i], '</b>');
           // console.log(replacement);
           input = input.split(splitKeywords[i]).join(replacement);
         }

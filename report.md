@@ -78,7 +78,6 @@ Trying out a few examples ourself we see that this unfortunately does not seem t
 
 This could be ameliorated by gathering more data, finetuning the neural network or letting it train even longer. Another way to improve this, would be to use some other form of embedding which places semantically close words next to each other in a vector space. GoogleNews-vectors-negative300.txt contains 3 million words with 300 features each which has already been trained with Google News data (100 billion words; https://code.google.com/archive/p/word2vec/). Simply converting the file from binary to txt using gensim (see preprocessing in original repository) took 30 mins and resulted in a 11GB file text; this huge dimensionality is why it was skipped for this project.
 
-<div class="pagebreak"></div>
 
 ## Project structure & How to
 * src/settings_configuration.py
