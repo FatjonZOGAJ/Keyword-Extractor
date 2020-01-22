@@ -152,15 +152,21 @@ Testing/Evaluation specific:
 		4.   Compare different models on test dataset (needs to let the model train for multiple epochs / iterations; was used to create the plots)
 
 # Interesting Findings
-Even though we did not use any form of true semantic embedding (like word2vec, GloVe), the neural network seems to have picked up on underlying information which sometimes allows it to predict words close in meaning to the actual keywords. These sometimes fit even better than the actual keywords.
+Even though we did not use any form of true semantic embedding (like word2vec, GloVe),
+the neural network seems to have picked up on underlying information which sometimes
+allows it to predict words close in meaning to the actual keywords.
+These sometimes fit even better than the actual keywords.
 
 Some examples of this are:
 * ![Predicted android in relation to phone](pictures/finding_android.png)
 * ![Found Samsung in relation to Blackberry](pictures/finding_samsung.png)
 * ![Found Pakistan in relation to Islamabad](pictures/finding_pakistan.png)
 
-This even seems to hold true for insider knowledge within a certain topic. In the following case the neural networks seems to have learned that geminis and lions seem to be similar within the astrology world.
+This even seems to hold true for insider knowledge within a certain topic.
+In the following case the neural networks seems to have learned that geminis and lions seem to be similar within the astrology world.
+(Or at least come up in similar contexts.)
 * ![Found lions in relation to gemini](pictures/finding_gemini.png)
+
 
 ## Work Breakdown Structure
 As can be seen in the following table, a lot of time went into preparation and trying to understand the problem at hand.
