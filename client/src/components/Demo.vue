@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-sm-10">
         <h1>Keyword Extraction Demo</h1>
-        <hr><br><br>
+        <hr><br>
         <b-button v-on:click="onReload" type="reload" class="btn btn-success btn-sm">
           Load 10 new Sentences
         </b-button>

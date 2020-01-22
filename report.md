@@ -1,16 +1,19 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Applied Deep Learning Final Report
 As part of exercise 3 we have written a report containing an informative summary about our implemented _Keyword-Extractor_.
 We have decided on taking on the problem of “Keyword Extraction” with the project type “Bring your own method”.
 This subfield of Natural Language Processing has been chosen as it touches on various topics such as word embedding, text analysis/semantics, translation, summarization, etc. which are of big interest for future work.
 
 ## General Information
-* What is the problem that you tried to solve?
-The goal of this project was to create a model which is able to predict keywords from a limited size input text.
+* The goal of this project was to create a model which is able to predict keywords from a limited size input text.
 Keyword prediction in the traditional sense usually depends on bigger input sizes as semantic meaning can be more easily
 transcribed if more information is contained within the input.
 
-* Why is it a problem?
-Considering the fact that most personal related data nowadays sent is through social media,
+* Considering the fact that most personal related data nowadays sent is through social media,
  these platforms contain lots of information waiting to be tapped into. As a Business Informatics student the dataset of
  Tweets [1] is of particular interest as it could lend insight into how one could use publicly available data for
  marketing/business strategy purposes. The twitter dataset was gathered by the linked study and contains
@@ -18,24 +21,22 @@ Considering the fact that most personal related data nowadays sent is through so
  hashtags at the end or were part of a conversation and not a standalone tweet which reduced the amount of tweets to 110k.
  This way only tweets which included a single hashtag in a semantically natural sentences were picked for the study.
  Manual random evaluation has shown that in 90% of the cases the found hashtags fit well as keyphrases.
- These datasets have been preprocessed in some way or another (remove non-latin words, special characters, etc).
+ This dataset has been preprocessed in some way or another (remove non-latin words, special characters, etc).
 Due to the sheer amount of data one needs to analyze to be able to find meaningful structures within, sophisticated algorithms
-are necessary which is why Deep Learning poses as an interesting opportunity.
+are necessary which is why Deep Learning poses an interesting opportunity.
 
 * Having heard that Decoder-Encoder RNNs can be used to translate sentences from one language to another in the course _Applied Deep Learning_, we have wanted to see if this could be used to do some sort of semantic keyword extraction. This project is based on the PyTorch Tutorial for sequence to sequence Networks and tries to _translate_ tweets to their respective keywords.
 
-* What is your solution?
-We have created a Twitter Hashtag Extractor/Suggestor, which is able to suggest keywords based on a short text with
+* We have created a Twitter Hashtag Extractor/Suggestor, which is able to suggest keywords based on a short text with
 limited size (like on Twitter, instagram, etc.).
 We compared different kinds of Neural networks by trying out different parameters and network architectures.
 Using an Encoder-Attention Decoder RNN reflecting the state-of-the-art proved the most successfull.
 
-* After trying out a few different kinds of datasets, it became observable that keyword extraction was highly domain specific. Due to this we have focused on the Twitter Dataset found in the following chinese paper ([Link paper](http://jkx.fudan.edu.cn/~qzhang/paper/keyphrase.emnlp2016.pdf)). Another thing that can be observed, is that, even though we reach a respectable prediction accuracy on the validation dataset (testTweet-keyword.txt) after training only on the training dataset (trnTweet-keyword.txt), it does not work ideally for own formulated tweets. It seems that the gathered data seems to have a specific lingo in common, which the Neural Network is able to detect within the training and validation dataset.
+* After trying out a few different kinds of datasets, it became observable that keyword extraction was highly domain specific. Due to this we have focused on the Twitter Dataset found in the following chinese paper ([1]). Another thing that can be observed, is that, even though we reach a respectable prediction accuracy on the validation dataset (testTweet-keyword.txt) after training only on the training dataset (trnTweet-keyword.txt), it does not work ideally for own formulated tweets. It seems that the gathered data seems to have a specific lingo in common, which the Neural Network is able to detect within the training and validation dataset.
 
-* Why is it a solution? (And in particular, why is or isn’t deep learning a solution?)
-Only looking at the Tweets [1] dataset we can say that Deep learning works pretty well for **this** kind of keyword extraction problem
+* Only looking at the Tweets [1] dataset we can say that Deep learning works pretty well for **this** kind of keyword extraction problem
 as it allows to make assumptions and find underlying structures not visible to the human eye. Looking at the bigger picture though,
-one must question the meaningfulness of the found model.
+one must question the meaningfulness of the found model. Thus it can be said that Deep Learning proves useful for keyword extraction if one keeps the domain specific limitations in mind.
 
 * The created embedding simply uses a self defined language dictionary which maps words to indices and vice versa.
 If we were to do the project again we would use a pre trained embedding which allows semantically similar words to be placed close to each other and thus carry more meaning.
@@ -82,6 +83,7 @@ Trying out a few examples ourself we see that this unfortunately does not seem t
 
 This could be ameliorated by gathering more data, finetuning the neural network or letting it train even longer. Another way to improve this, would be to use some other form of embedding which places semantically close words next to each other in a vector space. GoogleNews-vectors-negative300.txt contains 3 million words with 300 features each which has already been trained with Google News data (100 billion words; https://code.google.com/archive/p/word2vec/). Simply converting the file from binary to txt using gensim (see preprocessing in original repository) took 30 mins and resulted in a 11GB file text; this huge dimensionality is why it was skipped for this project.
 
+<div class="pagebreak"></div>
 
 ## Project structure & How to
 * src/settings_configuration.py
@@ -90,6 +92,11 @@ Contains all the necessary parameters which were changed/finetuned and informati
 To run a short **demo** showing a short visualization and analysis on the test dataset (testTweet-keyword.txt) simply **run the main method after setting the directory** in line 4 of settings_configuration.py. A **prerequisite** for this is, that there exists a pre-trained model to load (see parameters MODEL_ITERATIONS_VERSION, date_folder). To try it out with my pretrained model, **copy the content of this folder** ([OneDrive Link](https://1drv.ms/u/s!ApPEwo6udEbQhe0K-FGEXV49RM4z8w?e=o0Lpdo); >150MB which is why it cannot be pushed onto Git) into the /models/2019-12-18-0349 directory.
 
 #### Some of the parameters which can be tried out are as follows.
+* SERVER_MODE: allows us to run a frontend demo by calling _npm run serve_ within the client folder and _python src/main.py_.
+This will create the following interface on _http://localhost:8080/_ :
+![Server Mode ](pictures/ServerMode.png)
+
+
 * TRAIN: defines if we start training or start testing our model
 
 Training specific:
@@ -157,19 +164,28 @@ Some examples of this are:
 * ![Found Samsung in relation to Blackberry](pictures/finding_samsung.png)
 * ![Found Pakistan in relation to Islamabad](pictures/finding_pakistan.png)
 
+This even seems to hold true for insider knowledge within a certain topic. In the following case the neural networks seems to have learned that geminis and lions seem to be similar within the astrology world.
+* ![Found lions in relation to gemini](pictures/finding_gemini.png)
 
 ## Work Breakdown Structure
+As can be seen in the following table, a lot of time went into preparation and trying to understand the problem at hand.
+This is to be expected when researching a new topic for the first time. More time than necessary was spent on this,
+but this was due to own interest. For future work it would be interesting to see, how well a project progresses if one
+starts the implementation without much background knowledge. Implementing the Network and finetuning it took less time than
+estimated, but this is due to the fact that this was cut short as the scope of the project has already become too large.
+All in all the project was a lot of fun and proved very successful as an introduction to Deep Learning.
+
 |Task|Time estimate|Actual time|
 |:--|--:|--:|
-| Find topic and create plan|10h| **25h** |
+| Find topic and create plan|10h| 25h |
 | Understand Papers | |10h|
 | Dataset collection + preparation| 5h | 2h|
 | Network design + implementation| 20h | 18h|
 | Training + finetuning| 15h |13h |
-| Building application | 5h | 4h |
-| Report + presentation| *14h|5h |
+| Building application | 5h | 6h |
+| Report + presentation| *14h|10h |
 | Lecture | *16h| 14h | |
-| | 3 ECTS + **10h** |
+| | 3 ECTS + **10h** | 3 ECTS + **23h**
 
 \* taken from the lecture TISS website
 
