@@ -21,7 +21,7 @@ Due to the sheer amount of data one needs to analyze to be able to find meaningf
 are necessary which is why Deep Learning poses an interesting opportunity.
 
 * Having heard that Decoder-Encoder RNNs can be used to translate sentences from one language to another in the course _Applied Deep Learning_, we have wanted to see if this could be used to do some sort of semantic keyword extraction. This project is based on the PyTorch Tutorial for sequence to sequence Networks and tries to _translate_ tweets to their respective keywords.
-f
+
 * We have created a Twitter Hashtag Extractor/Suggestor, which is able to suggest keywords based on a short text with
 limited size (like on Twitter, instagram, etc.).
 We compared different kinds of Neural networks by trying out different parameters and network architectures.
